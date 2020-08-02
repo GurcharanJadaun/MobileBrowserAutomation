@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite guice-stage="DEVELOPMENT" name="Failed suite [Suite]">
+  <test thread-count="5" name="Duck Browser(failed)">
+    <parameter name="name" value="Duck"/>
+    <parameter name="type" value="App"/>
+    <classes>
+      <class name="assigment.DriverScript.DriverScript">
+        <methods>
+          <include name="beforeTest"/>
+          <include name="setUpClass"/>
+          <include name="feature" invocation-numbers="0"/>
+          <include name="tearDownClass"/>
+          <include name="endSession"/>
+        </methods>
+      </class> <!-- assigment.DriverScript.DriverScript -->
+    </classes>
+  </test> <!-- Duck Browser(failed) -->
+</suite> <!-- Failed suite [Suite] -->
