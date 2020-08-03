@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite guice-stage="DEVELOPMENT" name="Failed suite [Suite]">
-  <test thread-count="5" name="Duck Browser(failed)">
-    <parameter name="name" value="Duck"/>
+  <test thread-count="5" name="Firefox Browser(failed)">
+    <parameter name="name" value="Firefox"/>
     <parameter name="type" value="App"/>
     <classes>
       <class name="assigment.DriverScript.DriverScript">
@@ -15,5 +15,5 @@
         </methods>
       </class> <!-- assigment.DriverScript.DriverScript -->
     </classes>
-  </test> <!-- Duck Browser(failed) -->
+  </test> <!-- Firefox Browser(failed) -->
 </suite> <!-- Failed suite [Suite] -->

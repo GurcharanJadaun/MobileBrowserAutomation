@@ -15,7 +15,7 @@ import cucumber.api.CucumberOptions;
 import cucumber.api.testng.AbstractTestNGCucumberTests;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
-@CucumberOptions(features = "src/main/java/assigment/FeatureFiles", glue = { "assigment/StepDefination" },format="pretty",plugin= {"html:target/cucumber-html-report"})
+@CucumberOptions(features = "src/main/java/assigment/FeatureFiles", glue = { "assigment/StepDefination" },format="pretty",plugin= {"html:target/cucumber-html-report","pretty:target/report.txt"})
 public class DriverScript extends AbstractTestNGCucumberTests {
 	 DeviceMaster device=new DeviceMaster();
 	 protected static  AppiumDriver<MobileElement> driver=null;
@@ -41,15 +41,13 @@ public class DriverScript extends AbstractTestNGCucumberTests {
 				}
 
 			WorkBookReader read=new WorkBookReader();
-			repository=read.getWorkBook("/src/main/resources/com/Repository/NativeObjectRepository.xls");
+			repository=read.getWorkBook("/src/main/resources/com/Repository/ObjectRepository.xls");
 			device.setAppiumDriverForApplication(appDetails);
 			driver=device.driver;
 			if(driver==null) {
 				System.exit(0);
 			}
-			else {
-				 System.out.println("Driver not null");
-			}
+			
 	 }
 
 	@AfterTest

@@ -3,7 +3,6 @@ package assigment.StepDefination;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.interactions.Keyboard;
 
 import assigment.DriverScript.DriverScript;
 import codeHelper.WaitHelper;
@@ -28,118 +27,153 @@ public class LoginDefinition extends DriverScript {
 	@When("^User hits login URL \"([^\"]*)\"$")
 	public void user_hits_login_URL(String arg1) {
 		boolean result = false;
-		
-		WaitHelper wait=new WaitHelper();
-		WaitParameters param=new WaitParameters();
-System.out.println("URL in Test  "+ arg1);
+
+		WaitHelper wait = new WaitHelper();
+		WaitParameters param = new WaitParameters();
 		param.setXpath(repository.get("SearchBar").toString());
 		param.setTime(20);
 		try {
-			if(wait.waitForElementToBeVisible(driver, param)) {
-			MobileElement ele=driver.findElement(By.xpath(param.getXpath()));
-			ele.click();
-			ele.clear();
-			driver.getKeyboard().sendKeys(arg1); 
-			Thread.sleep(500);
-			driver.getKeyboard().sendKeys(Keys.ENTER); 
-			driver.hideKeyboard();
-			result = true;}
+			if (wait.waitForElementToBeVisible(driver, param)) {
+				MobileElement ele = driver.findElement(By.xpath(param.getXpath()));
+				ele.click();
+				ele.clear();
+				driver.getKeyboard().sendKeys(arg1);
+				Thread.sleep(500);
+				driver.getKeyboard().sendKeys(Keys.ENTER);
+				Thread.sleep(500);
+				driver.hideKeyboard();
+				Thread.sleep(500);
+				result = true;
+			}
 		} catch (Exception ex) {
-			System.out.println("Exception "+ex.getMessage());
+			System.out.println("Exception " + ex.getMessage());
 			result = false;
 		}
 		Assert.assertTrue(result);
 	}
 
-	@Given("^\"([^\"]*)\" page is displayed$")
-	public void page_is_displayed(String arg1) {
-		boolean result=false;
-		WaitHelper wait=new WaitHelper();
-		WaitParameters param=new WaitParameters();
-		
+	@Given("^\"([^\"]*)\" element is displayed$")
+	public void element_is_displayed(String arg1) {
+		boolean result = false;
+		WaitHelper wait = new WaitHelper();
+		WaitParameters param = new WaitParameters();
+
 		param.setXpath(repository.get(arg1).toString());
 		param.setTime(20);
-		result=wait.waitForPresenceOfElement(driver, param);
+		result = wait.waitForPresenceOfElement(driver, param);
 		Assert.assertTrue(result);
 	}
 
-	@When("^User enters \"([^\"]*)\" in \"([^\"]*)\" text field$")		 
+	@When("^User enters \"([^\"]*)\" in \"([^\"]*)\" text field$")
 	public void user_enters_data_in_fieldLabel_text_field(String data, String locator) {
-		boolean result=false;
-		WaitHelper wait=new WaitHelper();
-		WaitParameters param=new WaitParameters();
-		
+		boolean result = false;
+		WaitHelper wait = new WaitHelper();
+		WaitParameters param = new WaitParameters();
+
 		param.setXpath(repository.get(locator).toString());
 		param.setTime(20);
-		if(wait.waitForElementToBeVisible(driver, param)) {
-			MobileElement ele=driver.findElement(By.xpath(param.getXpath()));
-					ele.click();
-					ele.clear();
-			driver.getKeyboard().sendKeys(data);
-			driver.hideKeyboard();
-			result=true;
+		if (wait.waitForElementToBeVisible(driver, param)) {
+			try {
+				MobileElement ele = driver.findElement(By.xpath(param.getXpath()));
+				ele.click();
+				Thread.sleep(1000);
+				driver.getKeyboard().sendKeys(data);
+				Thread.sleep(1000);
+				driver.hideKeyboard();
+				Thread.sleep(1000);
+				result = true;
+			} catch (Exception ex) {
+				System.out.println("Exception >>" + ex.getMessage());
+			}
 		}
 		Assert.assertTrue(result);
 	}
 
 	@When("^User taps \"([^\"]*)\" Button$")
 	public void user_taps_Button(String arg1) {
-		boolean result=false;
-		WaitHelper wait=new WaitHelper();
-		WaitParameters param=new WaitParameters();
-		
+		boolean result = false;
+		WaitHelper wait = new WaitHelper();
+		WaitParameters param = new WaitParameters();
+
 		param.setXpath(repository.get(arg1));
 		param.setTime(20);
-	
-		if(wait.waitForButtonToBeClickable(driver, param)) {
+
+		if (wait.waitForButtonToBeClickable(driver, param)) {
 			try {
-			driver.findElement(By.xpath(param.getXpath())).click();
-			result=true;}
-			catch(Exception ex)
-			{
-				System.out.println("Exception>> "+ex.getMessage());
+				driver.findElement(By.xpath(param.getXpath())).click();
+				result = true;
+			} catch (Exception ex) {
+				System.out.println("Exception>> " + ex.getMessage());
 			}
-		}
-		else {
+		} else {
 			System.out.println("Button Not Clickable");
 		}
-		
+
 		Assert.assertTrue(result);
-		//get rid of remember password toast
-		
+		// get rid of remember password toast
+
 		param.setXpath(repository.get("RememberLoginToast"));
-		param.setTime(4);
-		System.out.println("new path-->"+param.getXpath());
-		if(wait.waitForElementToBeVisible(driver, param)) {
+		param.setTime(2);
+		param.setLog(false);
+		if (wait.waitForElementToBeVisible(driver, param)) {
 			driver.findElement(By.xpath(repository.get("NeverButton"))).click();
 		}
 	}
 
-	@Then("^The \"([^\"]*)\" page should be displayed$")
-	public void the_page_should_be_displayed(String arg1) {
-		boolean result=false;
-		WaitHelper wait=new WaitHelper();
-		WaitParameters param=new WaitParameters();
+	@Then("^The \"([^\"]*)\" element should be displayed$")
+	public void the_element_should_be_displayed(String arg1) {
+		boolean result = false;
+		WaitHelper wait = new WaitHelper();
+		WaitParameters param = new WaitParameters();
 		param.setXpath(repository.get(arg1).toString());
 		param.setTime(20);
-		result=wait.waitForPresenceOfElement(driver, param);
+		result = wait.waitForPresenceOfElement(driver, param);
 		Assert.assertTrue(result);
 	}
-	@Then("^The \"([^\"]*)\" page should not be displayed$")
-	public void the_page_should_not_be_displayed(String arg1) {
-		boolean result=false;
-		WaitHelper wait=new WaitHelper();
-		WaitParameters param=new WaitParameters();
-		param.setXpath(repository.get(arg1).toString());
-		param.setTime(10);
-		result=wait.waitForPresenceOfElement(driver, param);
-		Assert.assertFalse(result);
-	}
+
 	@Then("^Close the browser$")
-	public void close_the_browser(){
+	public void close_the_browser() {
 		driver.closeApp();
 		((AndroidDriver<MobileElement>) driver).pressKey(new KeyEvent(AndroidKey.HOME));
-			boolean result = driver.queryAppState(appDetails.get("name")).toString().contains("NOT_RUNNING");
-			Assert.assertTrue(result);
+		boolean result = driver.queryAppState(appDetails.get("name")).toString().contains("NOT_RUNNING");
+		Assert.assertTrue(result);
+	}
+
+	@Then("^An alert with text \"([^\"]*)\" should appear$")
+	public void an_alert_with_text_should_appear(String message) {
+		boolean result = false;
+		WaitHelper wait = new WaitHelper();
+		result = wait.waitForAlert(driver, 5).contains(message);
+		Assert.assertTrue(result);
+	}
+
+	@Then("^On accepting the alert$")
+	public void On_accepting_the_alert() {
+		boolean result = false;
+		try {
+			driver.switchTo().alert().accept();
+			result = true;
+		} catch (Exception ex) {
+			result = false;
+		}
+		Assert.assertTrue(result);
+		WaitHelper wait = new WaitHelper();
+		WaitParameters param = new WaitParameters();
+		param.setXpath(repository.get("RememberLoginToast"));
+		param.setTime(3);
+		param.setLog(false);
+		if (wait.waitForElementToBeVisible(driver, param)) {
+			driver.findElement(By.xpath(repository.get("NeverButton"))).click();
+		}
+	}
+	@When("^Zoom out such that \"([^\"]*)\" element is visible$")
+	public void zoom_out_such_that_element_is_visible(String element) {
+		boolean result = false;
+		WaitHelper wait = new WaitHelper();
+		WaitParameters param = new WaitParameters();
+		param.setXpath(repository.get(element).toString());
+		param.setTime(20);	
+		result=wait.waitToFit(driver, param);
+		Assert.assertTrue(result);
 	}
 }

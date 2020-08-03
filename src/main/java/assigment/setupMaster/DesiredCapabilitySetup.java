@@ -18,7 +18,7 @@ public class DesiredCapabilitySetup {
 	 
 	 cap.setCapability(MobileCapabilityType.BROWSER_NAME, map);	 
 	 cap.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android");
-	 cap.setCapability(MobileCapabilityType.PLATFORM_VERSION, "8.1.0");
+	 cap.setCapability(MobileCapabilityType.PLATFORM_VERSION, "5.1.1");
 	 cap.setCapability(MobileCapabilityType.AUTOMATION_NAME,"UiAutomator2");
 	 cap.setCapability(MobileCapabilityType.DEVICE_NAME, "Small_Device");
 	 cap.setCapability(MobileCapabilityType.UDID, "ZH8005ZMX7");
@@ -37,13 +37,12 @@ public AppiumDriver<MobileElement> setDesiredCapabilities(AppiumDriver<MobileEle
 	 if(AppDetails.get("type").equalsIgnoreCase("App")) {
 	 cap.setCapability("appPackage", AppDetails.get("name"));
 	 cap.setCapability("appActivity", AppDetails.get("activity"));
-	 //cap.setCapability("systemPort",Integer.parseInt(AppDetails.get("port")));
 	 }
 	 cap.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android");
 	 cap.setCapability(MobileCapabilityType.PLATFORM_VERSION,"5.1.1");
 	 cap.setCapability(MobileCapabilityType.AUTOMATION_NAME,"UiAutomator2");
-	 cap.setCapability(MobileCapabilityType.DEVICE_NAME, "192.168.1.107:5555");
-	// cap.setCapability(MobileCapabilityType.UDID, "ZH8005ZMX7");
+	// cap.setCapability(MobileCapabilityType.DEVICE_NAME, "192.168.1.107:5555");
+	 cap.setCapability(MobileCapabilityType.UDID, "ZH8005ZMX7");
 	 cap.setCapability("newCommandTimeout", 300);
 	 try {
 		 driver=new AndroidDriver<MobileElement>(new URL("http://127.0.0.1:4723/wd/hub"),cap);
